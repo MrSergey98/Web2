@@ -143,7 +143,7 @@
         $stmt->bindParam(':id2', $id2);
         $stmt->execute();
 
-        $msg = "Данные успешно переданы!";
+        $msg = '<div style="font-size: 25px; color: green; border-radius: 5px; font-weight: bold; text-align: center;"> Данные успешно переданы! </div>';
         }
         catch (PDOException $e) { 
             echo "FAIL: " . $e->getMessage();
