@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    font-size: 18px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 600px;
+    padding: 30px;
+    border: 1px solid rgba(255, 0, 0, 0.404);
+    background-color: rgba(94, 255, 0, 0.185);
+    border-radius: 15px;
+}
+.mrg {
+    margin:10px;
+}
