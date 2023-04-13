@@ -2,8 +2,6 @@
 
     if(count($_POST)>0) {
 
-
-
     $user = 'u52876'; 
     $pass = '9106944'; 
 
@@ -73,28 +71,28 @@
         $ch = "checked";
     }
     //validation
-    if($name == "") {
+    if ( preg_match("/[^(\w)|(\x7F-\xFF)|(\s)]/",$name) || (strlen($name)<2 || strlen($name)>50) ) {
         $msg = 'Введите имя!';
     }
-    elseif($email == "") {
+    elseif(!preg_match("/[a-zA-z][a-zA-Z0-9]{0,}@[a-z]{0,}\.[a-z]{0,}/i", $email) || (strlen($email)<2 || strlen($email)>50)) {
         $msg = 'Введите email!';
     }
-    elseif($date == ""){
+    elseif(preg_match("/^$/",$date)){
         $msg = 'Введите дату рождения!';
     }
-    elseif($gm =='' & $gw == ''){
+    elseif(preg_match("/^$/",$gm) & preg_match("/^$/",$gw)){
         $msg = 'Укажите пол!';
     }
-    elseif($l1=='' & $l2=='' & $l3=='' & $l4=='') {
+    elseif(preg_match("/^$/",$l1) & preg_match("/^$/",$l2) & preg_match("/^$/",$l3) & preg_match("/^$/",$l4)) {
         $msg = 'Укажите кол-во конечностей!';
     }
-    elseif($sg == '' & $sw == '' & $sl ==''){
+    elseif(preg_match("/^$/",$sg) & preg_match("/^$/",$sw) & preg_match("/^$/",$sl)){
         $msg = 'Укажите суперспособности!';
     }
-    elseif($biograf==''){
+    elseif(preg_match("/^$/",$biograf)){
         $msg = 'Укажите биографию!';
     }
-    elseif($ch==''){
+    elseif(preg_match("/^$/",$ch)){
         $msg= 'Отметьте пункт: С контактом ознакомлен!';
     }
     else {
@@ -112,36 +110,19 @@
         $stmt -> execute();
 
         $id1 = $db->lastInsertId();
-        
-        $t = (int)1;
-        $f = (int)0;
-        $stmt = $db->prepare("INSERT INTO super VALUES(NULL, :god, :walk, :levitation)");
+
         if($sg=="selected"){
-            $stmt->bindParam(':god', $t);
-        }
-        else {
-            $stmt->bindParam(':god', $f);
+            $stmt = $db->prepare("INSERT INTO sopid VALUES($id1, 1)");
+            $stmt->execute();
         }
         if($sw=="selected"){
-            $stmt->bindParam(':walk', $t);
-        }
-        else {
-            $stmt->bindParam(':walk', $f);
+            $stmt = $db->prepare("INSERT INTO sopid VALUES($id1, 2)");
+            $stmt->execute();
         }
         if($sl=="selected"){
-            $stmt->bindParam(':levitation', $t);
+            $stmt = $db->prepare("INSERT INTO sopid VALUES($id1, 3)");
+            $stmt->execute();
         }
-        else {
-            $stmt->bindParam(':levitation', $f);
-        }
-        $stmt->execute();
-
-        $id2 = $db->lastInsertId();
-
-        $stmt = $db->prepare("INSERT INTO sopid VALUES(:id1, :id2)");
-        $stmt->bindParam(':id1', $id1);
-        $stmt->bindParam(':id2', $id2);
-        $stmt->execute();
 
         $msg = '<div style="font-size: 25px; color: green; border-radius: 5px; font-weight: bold; text-align: center;"> Данные успешно переданы! </div>';
         }
