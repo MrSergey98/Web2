@@ -1,16 +1,8 @@
 <?php
-/**
- * Реализовать проверку заполнения обязательных полей формы в предыдущей
- * с использованием Cookies, а также заполнение формы по умолчанию ранее
- * введенными значениями.
- */
 
-// Отправляем браузеру правильную кодировку,
-// файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
 
-// В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
-// и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
+$values=array();
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Массив для временного хранения сообщений пользователю.
   $messages = array();
@@ -24,6 +16,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages[] = 'Спасибо, результаты сохранены.';
   }
 
+  if (!empty($_COOKIE['fio_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('fio_value', '', 100000);
+  }
+  if (!empty($_COOKIE['email_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('email_value', '', 100000);
+  }
+  if (!empty($_COOKIE['date_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('date_value', '', 100000);
+  }
+  if (!empty($_COOKIE['gender_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('gender_value', '', 100000);
+  }
+  if (!empty($_COOKIE['limb_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('limb_value', '', 100000);
+  }
+  if (!empty($_COOKIE['sg_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('sg_value', '', 100000);
+  }
+  if (!empty($_COOKIE['sw_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('sw_value', '', 100000);
+  }
+  if (!empty($_COOKIE['sl_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('sl_value', '', 100000);
+  }
+  if (!empty($_COOKIE['biograf_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('biograf_value', '', 100000);
+  }
+  if (!empty($_COOKIE['ch_value'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('ch_value', '', 100000);
+  }
   // Складываем признак ошибок в массив.
   $errors = array();
   $errors['fio'] = !empty($_COOKIE['fio_error']);
@@ -87,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
   // Складываем предыдущие значения полей в массив, если есть.
-  $values = array();
   $values['fio'] = empty($_COOKIE['fio_value']) ? '' : $_COOKIE['fio_value'];
   $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
   $values['date'] = empty($_COOKIE['date_value']) ? '' : $_COOKIE['date_value'];
@@ -137,8 +168,6 @@ else {
     $errors = TRUE;
   }
   else {
-    unset($_COOKIE['date_value']);
-    setcookie("date_value", "", time() - 300,"/");
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('date_value', trim($_POST['bdate']), time() + 30 * 24 * 60 * 60);
   }
@@ -169,12 +198,6 @@ else {
     $errors = TRUE;
   }
   else {
-    unset($_COOKIE['sg_value']);
-    setcookie("sg_value", "", time() - 300,"/");
-    unset($_COOKIE['sl_value']);
-    setcookie("sl_value", "", time() - 300,"/");
-    unset($_COOKIE['sw_value']);
-    setcookie("sw_value", "", time() - 300,"/");
     // Сохраняем ранее введенное в форму значение на месяц.
     foreach ($_POST['super'] as $s) {
       switch($s) {
@@ -191,8 +214,6 @@ else {
     $errors = TRUE;
   }
   else {
-    unset($_COOKIE['biograf_value']);
-    setcookie("biograf_value", "", time() - 300,"/");
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('biograf_value', $_POST['biograf'], time() + 30 * 24 * 60 * 60);
   }
@@ -203,16 +224,9 @@ else {
     $errors = TRUE;
   }
   else {
-    unset($_COOKIE['ch_value']);
-    setcookie("ch_value", "", time() - 300,"/");
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('ch_value', isset($_POST['check'])?' ':'on', time() + 30 * 24 * 60 * 60);
   }
-  
-// *************
-// TODO: тут необходимо проверить правильность заполнения всех остальных полей.
-// Сохранить в Cookie признаки ошибок и значения полей.
-// *************
 
   if ($errors) {
     // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
@@ -220,7 +234,7 @@ else {
     exit();
   }
   else {
-    // Удаляем Cookies с признаками ошибок.
+    //Удаляем Cookies с признаками ошибок.
     setcookie('fio_error', '', 100000);
     setcookie('email_error', '', 100000);
     setcookie('gender_error', '', 100000);
@@ -229,46 +243,43 @@ else {
     setcookie('biograf_error', '', 100000);
     setcookie('ch_error', '', 100000);
     setcookie('date_error', '', 100000);
-
-    // TODO: тут необходимо удалить остальные Cookies.
   }
 
   // Сохранение в БД.
   try {
     $user = 'u52876'; 
     $pass = '9106944';
-    $db = new PDO ("mysql:host=localhost;dbname=u52876", $user, $pass, [PDO::ATTR_PERSISTENT => true,
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    $stmt = $db->prepare("INSERT INTO info VALUES(NULL, :fname, :email, :bdate, :gender, :limb, :biography)");
+    $db = new PDO ("mysql:host=localhost;dbname=u52876", $user, $pass, [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $stmt = $db->prepare("INSERT INTO info VALUES(NULL, :fname,:email,:bdate,:gender,:limb,:biography)");
 
-    $stmt->bindParam(':fname',$values['name']);
-    $stmt->bindParam(':email',$values['email']);
-    $stmt->bindParam(':bdate',$values['date']);
-    $stmt->bindParam(':gender',$values['gender']);
-    $stmt->bindParam(':limb',$values['limb']);
-    $stmt->bindParam(':biography',$values['biograf']);
+    $stmt->bindParam(':fname',$_COOKIE['fio_value']);
+    $stmt->bindParam(':email',$_COOKIE['email_value']);
+    $stmt->bindParam(':bdate',$_COOKIE['date_value']);
+    $stmt->bindParam(':gender',$_COOKIE['gender_value']);
+    $stmt->bindParam(':limb',$_COOKIE['limb_value']);
+    $stmt->bindParam(':biography',$_COOKIE['biograf_value']);
     $stmt -> execute();
 
     $id1 = $db->lastInsertId();
 
-    if($sg=="selected"){
+    if($_COOKIE['sg_value']=="selected"){
         $stmt = $db->prepare("INSERT INTO sopid VALUES($id1, 1)");
         $stmt->execute();
     }
-    if($sw=="selected"){
+    if($_COOKIE['sw_value']=="selected"){
         $stmt = $db->prepare("INSERT INTO sopid VALUES($id1, 2)");
         $stmt->execute();
     }
-    if($sl=="selected"){
+    if($_COOKIE['sl_value']=="selected"){
         $stmt = $db->prepare("INSERT INTO sopid VALUES($id1, 3)");
         $stmt->execute();
     }
     }
     catch (PDOException $e) { 
-        echo "FAIL: " . $e->getMessage();
+        echo "Fail: ".$e->getMessage();
     }
 
-  // Сохраняем куку с признаком успешного сохранения.
+  //Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
 
   // Делаем перенаправление.
