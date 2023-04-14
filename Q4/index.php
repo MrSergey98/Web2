@@ -16,46 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages[] = 'Спасибо, результаты сохранены.';
   }
 
-  if (!empty($_COOKIE['fio_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('fio_value', '', 100000);
-  }
-  if (!empty($_COOKIE['email_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('email_value', '', 100000);
-  }
-  if (!empty($_COOKIE['date_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('date_value', '', 100000);
-  }
-  if (!empty($_COOKIE['gender_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('gender_value', '', 100000);
-  }
-  if (!empty($_COOKIE['limb_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('limb_value', '', 100000);
-  }
-  if (!empty($_COOKIE['sg_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('sg_value', '', 100000);
-  }
-  if (!empty($_COOKIE['sw_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('sw_value', '', 100000);
-  }
-  if (!empty($_COOKIE['sl_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('sl_value', '', 100000);
-  }
-  if (!empty($_COOKIE['biograf_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('biograf_value', '', 100000);
-  }
-  if (!empty($_COOKIE['ch_value'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('ch_value', '', 100000);
-  }
+  
   // Складываем признак ошибок в массив.
   $errors = array();
   $errors['fio'] = !empty($_COOKIE['fio_error']);
@@ -139,6 +100,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 else {
+
+    setcookie('fio_value', '', 100000);
+  
+
+    setcookie('email_value', '', 100000);
+  
+
+    setcookie('date_value', '', 100000);
+  
+
+    setcookie('gender_value', '', 100000);
+  
+    setcookie('limb_value', '', 100000);
+
+
+    setcookie('sg_value', '', 100000);
+
+
+    setcookie('sw_value', '', 100000);
+
+
+    setcookie('sl_value', '', 100000);
+
+
+    setcookie('biograf_value', '', 100000);
+
+    setcookie('ch_value', '', 100000);
+
   // Проверяем ошибки.
   $errors = FALSE;
 
