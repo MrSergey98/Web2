@@ -55,15 +55,15 @@ if (!empty($messages)) {
 
         <label>С контактом ознакомлен:<input type="checkbox" name="check" id="" class="mrg" <?php print $values['ch']==''?'':'checked'; ?>></label>
 
-        <button name="btn" type="submit" class="mrg" value="Отправить" style="color: white;background-color: rgba(255, 0, 0, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px;">Отправить</button>
+        <button name="btn" type="submit" class="mrg" value="Отправить" style="color: white;background-color: rgba(26, 177, 136, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px;">Отправить</button>
 
 
     </form>
-    <a  style="margin-top: 15px; color: white;background-color: rgba(255, 0, 0, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px; text-align: center; padding-top: 10px; text-decoration: none;" href="login.php">ВОЙТИ</a>
+    <a  style="margin-top: 15px; color: white;background-color: rgba(26, 177, 136, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px; text-align: center; padding-top: 10px; text-decoration: none;" href="login.php">ВОЙТИ</a>
     
     <?php
     if(!empty($_COOKIE[session_name()])&&!empty($_SESSION['login']))
-    printf('<a  style="margin-top: 15px; color: white;background-color: rgba(255, 0, 0, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px; text-align: center; padding-top: 10px; text-decoration: none;" href="unlog.php">ВЫЙТИ</a>');
+    printf('<a  style="margin-top: 15px; color: white;background-color: rgba(26, 177, 136, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px; text-align: center; padding-top: 10px; text-decoration: none;" href="unlog.php">ВЫЙТИ</a>');
     ?>
   </body>
 </html>
