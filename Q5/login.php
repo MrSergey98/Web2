@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <form action="" method="post" class="form_2">
     <label style="font-size: 25px; color: rgb(12,120,120)">Логин:</label> <input name="login" style="margin: 10px; height: 20px;"/> 
     <label style="font-size: 25px; color: rgb(12,120,120)">Пароль: </label><input name="pass" type="password" style="margin: 10px; margin-bottom: 20px;  height: 20px;"/> 
-    <input type="submit" value="Войти" style="color: white;background-color: rgba(255, 0, 0, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px;"/>
+    <input type="submit" value="Войти" style="color: white;background-color: rgba(26, 177, 136, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px;"/>
   </form>
-  <a style="margin-top: 15px;color: white;background-color: rgba(255, 0, 0, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px; text-align: center; padding-top: 10px; text-decoration: none;" href="unlog.php">ВЫЙТИ</a>
+  <a style="margin-top: 15px; color: white;background-color: rgba(26, 177, 136, 0.726);border-radius: 15px;width: 150px;height: 35px;font-size: 20px; text-align: center; padding-top: 10px; text-decoration: none;" href="unlog.php">ВЫЙТИ</a>
 </body>
 </html>
 
