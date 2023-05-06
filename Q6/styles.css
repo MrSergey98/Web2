@@ -1,0 +1,33 @@
+ 
+    label { 
+        margin-left:15px; 
+      } 
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        font-size: 18px;
+        }
+      input.submit {
+        color: white;background-color: rgba(26, 177, 136, 0.726);border-radius: 15px;width: fit-content;height: 35px;font-size: 20px;
+      }
+      .err {
+        border: 2px solid red;
+      }
+      .submit {
+        margin-top: 15px;
+      }
+      a.redir {
+        text-decoration: none;
+        background-color: rgba(26, 177, 136, 0.726);
+        border-radius: 15px;
+        width: fit-content;
+        border: 1px solid black;
+        color: WHITE;
+        width: 100px;
+        text-align: center;
+        font-size: 25px;
+        margin: 10px;
+      }
+    
