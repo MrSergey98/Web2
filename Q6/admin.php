@@ -199,8 +199,28 @@ if($_SERVER['REQUEST_METHOD']=='GET') {
   
 }
 else {
+
+  if (empty($_SERVER['PHP_AUTH_USER']) ||empty($_SERVER['PHP_AUTH_PW'])) {
+    header('HTTP/1.1 401 Unanthorized');
+    header('WWW-Authenticate: Basic realm="My site"');
+    print('<h1>401 Требуется авторизация</h1>');
+    exit();
+  }
+
   try{
     $db=db();
+
+    $login = $_SERVER['PHP_AUTH_USER'];
+    $pw = $_SERVER['PHP_AUTH_PW'];
+    $stmt = $db->query("SELECT pass from logadm where logi='".$login."'")->fetch();
+    if($stmt['pass']!=md5($pw)){
+      header('HTTP/1.1 401 Unanthorized');
+      header('WWW-Authenticate: Basic realm="My site"');
+      print('<h1>401 Неверный логин или пароль</h1>');
+      exit();
+    }
+
+
     $count = $db->query("SELECT id from info")->fetchAll();
     $count = count($count);
     $onchange=array();
@@ -310,7 +330,6 @@ else {
   }
   header('Location: admin.php');
 }
-
 
 
 // *********
